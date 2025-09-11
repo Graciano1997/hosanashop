@@ -1,0 +1,30 @@
+export type Product = {
+id: number,
+name:string,
+code:string,
+qty:number,
+in_stock:number,
+price:number,
+category:string,
+lote:string,
+category_id:number,
+brand:string,
+mesure_unit:string,
+weight:number,
+manufacture_date:string,
+expire_date:string,
+taxes:number,
+location_in_stock:number,
+description:string,
+dimension:string,
+observation:number,
+promotion:boolean,
+discount:number,
+keyword:string,
+promotion_start:string | null,
+promotion_end:string | null,
+};
+
+export type ProductProps = {
+    product: Product
+}
