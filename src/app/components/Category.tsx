@@ -20,7 +20,7 @@ export default function Category() {
   }, []);
 
   return (
-    <div className={`fixed transition ${visibility ? 'left-0 top-0 w-[230px] h-[100%] flex flex-col items-center pt-15  gap-2' : 'top-16 left-4 w-[100px] h-[0]'}  bg-white/90`}>
+    <div className={` transition-all duration-200 ${visibility ? 'fixed left-0 top-0 w-[230px] h-[100%] flex flex-col items-center pt-15  gap-2' : 'w-[100px] h-[0]'}  bg-white/90`}>
       {
         visibility &&
         <button onClick={() => { setVisivility(false) }} className="absolute text-red-500 text-xl bg-white p-2 shadow  right-[0] top-[0] transition-all duration-200 hover:bg-red-400 hover:text-white cursor-pointer" style={{ zIndex: 2000 }} >X</button>
@@ -30,8 +30,7 @@ export default function Category() {
         visibility &&
         <>
           <h1 className="font-bold text-xl self-start pl-3">Categorias</h1>
-          <br />
-          <br />
+          <div className="overflow-y-scroll flex flex-col gap-3 mt-4">
           {
             categories.map((category: any) =>
               <div className="bg-purple-600 shadow text-white w-[200px] flex justify-center ">
@@ -40,17 +39,13 @@ export default function Category() {
                 </button>
               </div>)
           }
+          </div>
         </>
       }
 
-
-
-
-
-
       {
         !visibility &&
-        <button onClick={() => { setVisivility(true) }} className="absolute text-red-500 text-xl bg-white p-2  shadow  right-[0] top-[0] transition-all duration-200 hover:bg-purple-400 hover:text-white cursor-pointer" style={{ zIndex: 2000 }} >Categorias</button>
+        <button onClick={() => { setVisivility(true) }} className="bg-black/70 text-white text-xl p-2 shadow transition-all duration-200  cursor-pointer" style={{ zIndex: 2000 }} >Categorias</button>
       }
 
     </div>

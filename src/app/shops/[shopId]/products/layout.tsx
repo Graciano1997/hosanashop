@@ -1,4 +1,5 @@
 import Category from "@/app/components/Category"
+import Checkout from "@/app/components/Checkout";
 
 // app/products/layout.tsx
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -8,6 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <header className="bg-white shadow p-4">
         <h1 className="text-2xl font-bold text-purple-700">Loja Virtual</h1>
       </header>
+      <Category/>
 
       <div className="flex justify-center item-center p-3 mt-8 mb-8">
         <div className='p-3  h-[10%] w-[85%] rounded'>
@@ -16,11 +18,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </div>
-      <Category/>
 
       <main>
         {children}
       </main>
+      <Checkout/>
     </div>
   );
 }
