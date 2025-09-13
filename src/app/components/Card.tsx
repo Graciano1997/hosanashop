@@ -12,38 +12,25 @@ export default function ProductCard( { product } : ProductProps) {
   return (
     <>
     <div className="bg-white/50  shadow hover:shadow-lg transition overflow-hidden p-4">
-              {
-                product.image ?
-                <img 
-                className="dark:invert"
-                src={product.image}
-                />
-                :
-                <Image
-                className="dark:invert ml-5"
-                src="/next.svg" 
-                alt="Next.js logo"
-                width={180}
-                height={38}
-                priority
-                />
-              }
-
-
-      
-
+      <div className="h-[150px]">
+        <img 
+        className="w-[100%] h-[100%] object-fill"
+        src={product.image??""}
+        />
+      </div>
+    
       {/* Conteúdo */}
       <div className="p-4 flex flex-col">
         <h3 className="font-semibold text-lg mb-2 truncate">{product.name}</h3>
         <p className="text-purple-600 font-bold text-xl"><Money amount={ Number(product.price)} /></p>
         <p onClick={()=>{setVisible(true)}} className="text-blue-400 font-light text-md cursor-pointer">Sobre</p>
-        <DefaultButton text="Adicionar ao Carrinho" css="" actionHandler={()=>{}} />
+        <DefaultButton text="Adicionar ao Carrinho" extraStyle="" actionHandler={()=>{}} />
       </div>
     </div>
     {visible &&
     <div className="absolute">
     <Modal closeHandler={()=>{setVisible(false)}}>
-     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 p-6 rounded-lg shadow-md  dark:bg-gray-900">
+     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 p-6 shadow-md  dark:bg-gray-900">
   {/* Image */}
   <div className="flex justify-center items-center">
     {product.image ? (
@@ -79,7 +66,6 @@ export default function ProductCard( { product } : ProductProps) {
     </div>
   </div>
 </div>
-
     </Modal>
     </div>
     }
