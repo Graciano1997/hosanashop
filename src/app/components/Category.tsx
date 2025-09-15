@@ -33,7 +33,7 @@ export default function Category() {
           <div className="overflow-y-scroll flex flex-col gap-3 mt-4">
           {
             categories.map((category: any) =>
-              <div className="bg-purple-600 shadow text-white w-[200px] flex justify-center ">
+              <div key={"cat"+category.id} className="bg-purple-600 shadow text-white w-[200px] flex justify-center ">
                 <button className="p-1 cursor-pointer ">
                   {category.name}
                 </button>
