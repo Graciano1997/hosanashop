@@ -10,13 +10,15 @@ type ShopContextType = {
     addItem: (item: Product, qty: number) => void;
     removeItem: (item: Product) => void,
     updateItem: (item: Product, qty:number) => void;
+    clean:()=>void;
 }
 
 export const ShopContext = createContext<ShopContextType>({
     cart: initialState,
     addItem: () => { },
     removeItem: () => { },
-    updateItem: () => {}
+    updateItem: () => {},
+    clean:()=>{}
 });
 
 export default function ShopProvider({ children }: { children: React.ReactNode }) {
@@ -37,7 +39,6 @@ export default function ShopProvider({ children }: { children: React.ReactNode }
     };
 
     const addItem = (item: Product, qty: number) => {
-
         let newItems: ProductShoppingCartItem[];
 
         newItems = [
@@ -94,10 +95,20 @@ export default function ShopProvider({ children }: { children: React.ReactNode }
         }
     }
 
+    const clean = ()=>{
+        setCart(
+            {
+               items:[],
+               qty:0,
+               total:0
+            }
+        )
+    }
+
 
 
     return (
-        <ShopContext.Provider value={{ cart, removeItem, addItem, updateItem }} >
+        <ShopContext.Provider value={{ cart, removeItem, addItem, updateItem, clean }} >
             {children}
         </ShopContext.Provider>
     )

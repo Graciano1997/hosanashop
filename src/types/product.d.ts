@@ -24,8 +24,7 @@ discount:number,
 keyword:string,
 promotion_start:string | null,
 promotion_end:string | null,
+isAddedHandler:()=>void | null
 };
 
-export type ProductProps = {
-    product: Product
-}
+export type ProductProps = { product: Product }

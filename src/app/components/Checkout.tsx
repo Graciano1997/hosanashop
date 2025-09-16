@@ -1,5 +1,4 @@
 "use client"
-
 import Modal from "./Modal"
 import React, { useContext, useEffect, useState } from "react"
 import { IP } from "@/lib/ip";
@@ -15,13 +14,12 @@ export default function Checkout() {
   const [checkoutVisibility, setCheckoutVisibility] = useState(false);
   const [products, setProducts] = useState([]);
   const [lastCreated, setLastCreated] = useState(null);
-  const { cart, removeItem, updateItem } = useContext(ShopContext)
+  const { cart, removeItem, updateItem, clean } = useContext(ShopContext)
 
   const fetchHandler = () => {
     fetch(`${IP}products${lastCreated ? `/last/ ${lastCreated}` : ''}`)
       .then((response) => response.json())
       .then(({ data, last_created_at }) => { setProducts((prev) => prev.concat(data)); setLastCreated(last_created_at) })
-
   }
 
   useEffect(() => {
@@ -78,7 +76,7 @@ export default function Checkout() {
                       </div>
                       <p><span className="md:hidden text-md font-semibold">Total: </span> <Money amount={product.subTotal} /></p>
                       <button
-                        onClick={() => removeItem(product.item)}
+                        onClick={() =>{product.item.isAddedHandler(); removeItem(product.item);}}
                         className="bg-red-600 text-white p-2 text-sm hover:bg-red-700 focus:bg-red-700 transition-colors duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 cursor-pointer"
                       >
                         <span className="flex items-center justify-center gap-4 ">
@@ -101,10 +99,8 @@ export default function Checkout() {
                   Carrinho vazio — vamos começar suas compras?
                 </p>
                 <ShoppingBagIcon className="w-15 h-15 text-black-200 mt-2" />
-                <DefaultButton isAdded={false} text="Continuar comprando" extraStyle={'p-5'} actionHandler={() => setCheckoutVisibility(false)} />
+                <DefaultButton isAdded={false} text="Continuar comprando" extraStyle={'p-5'} actionHandler={() =>{ setCheckoutVisibility(false); clean(); }} />
               </div>
-
-
             }
           </>
         </Modal>

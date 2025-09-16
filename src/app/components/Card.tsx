@@ -8,12 +8,11 @@ import { ShopContext } from "../hooks/ShopContext";
 import { TrashIcon } from "@heroicons/react/24/outline";
 
 export default function ProductCard({ product }: ProductProps) {
-
   const [visible, setVisible] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
-
   const { cart, addItem, removeItem } = useContext(ShopContext);
-
+  product.isAddedHandler = ()=>{setIsAdded(false)};
+  
   return (
     <>
       <div className="bg-white/50  shadow hover:shadow-lg transition overflow-hidden p-4">
@@ -29,9 +28,7 @@ export default function ProductCard({ product }: ProductProps) {
           <h3 className="font-semibold text-lg mb-2 truncate">{product.name}</h3>
           <p className="text-purple-600 font-bold text-xl"><Money amount={Number(product.price)} /></p>
           <p onClick={() => { setVisible(true) }} className="text-blue-400 font-light text-md cursor-pointer">Sobre</p>
-          <DefaultButton isAdded={isAdded} text="Adicionar ao Carrinho" extraStyle={""} actionHandler={() => { addItem(product, 1); setIsAdded(true); }} />
-
-
+          <DefaultButton isAdded={isAdded} text="Adicionar ao Carrinho" extraStyle={""} actionHandler={() => { if(!isAdded){addItem(product, 1);} setIsAdded(true); }} />
         </div>
       </div>
       {visible &&
@@ -80,7 +77,7 @@ export default function ProductCard({ product }: ProductProps) {
                       </span>
                     </button>
                     }
-                    <DefaultButton isAdded={isAdded} text="Adicionar ao Carrinho" extraStyle={"p-3"} actionHandler={() => { addItem(product, 1); setIsAdded(true); }} />
+                    <DefaultButton isAdded={isAdded} text="Adicionar ao Carrinho" extraStyle={"p-3"} actionHandler={() => { if(!isAdded){addItem(product, 1);}  setIsAdded(true); }} />
                   </div>
                 </div>
               </div>
@@ -88,7 +85,6 @@ export default function ProductCard({ product }: ProductProps) {
           </Modal>
         </div>
       }
-
     </>
   );
 }
