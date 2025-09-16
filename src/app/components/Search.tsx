@@ -23,7 +23,7 @@ export default function Search({ categories, searchHandler, placeHolder, default
                         setCategory(el.target.value);
                         }} className="cursor-pointer shadow p-2">
                         <option className="bg-red-200" disabled>Categorias</option>
-                        <option value={0}>Todas</option>
+                        <option value={0}>Diversos</option>
                         {
                             categories.map((category: any) =>
                                 <option key={"cat"+category.id} value={category.id} className="p-1 cursor-pointer ">

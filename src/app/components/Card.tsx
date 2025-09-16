@@ -2,13 +2,16 @@ import { ProductProps } from "@/types/product";
 import Money from "./Money";
 import Image from "next/image";
 import Modal from "./Modal";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import DefaultButton from "./DefaultButton";
+import { ShopContext } from "../hooks/ShopContext";
 
 export default function ProductCard( { product } : ProductProps) {
 
   const [visible,setVisible] = useState(false);
-  
+
+  const {cart,addItem}=useContext(ShopContext);
+
   return (
     <>
     <div className="bg-white/50  shadow hover:shadow-lg transition overflow-hidden p-4">
@@ -24,7 +27,7 @@ export default function ProductCard( { product } : ProductProps) {
         <h3 className="font-semibold text-lg mb-2 truncate">{product.name}</h3>
         <p className="text-purple-600 font-bold text-xl"><Money amount={ Number(product.price)} /></p>
         <p onClick={()=>{setVisible(true)}} className="text-blue-400 font-light text-md cursor-pointer">Sobre</p>
-        <DefaultButton text="Adicionar ao Carrinho" extraStyle="" actionHandler={()=>{}} />
+        <DefaultButton text="Adicionar ao Carrinho" extraStyle="" actionHandler={()=>{addItem(product,1)}} />
       </div>
     </div>
     {visible &&

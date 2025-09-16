@@ -6,7 +6,7 @@ import { CardsSkeleton } from "@/app/components/skeleton/CardSkeleton";
 import { IP } from "@/lib/ip";
 import removeDuplicate from "@/lib/removeDuplicate";
 import { Product } from "@/types/product";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useContext, useEffect, useState } from "react";
 
 export default function Home() {
 
@@ -15,7 +15,8 @@ export default function Home() {
     const [lastCreated, setLastCreated] = useState(null);
     const [dispatch,setDispatch]=useState(true);
     const [lastCreatedCategory, setLastCreatedCategory] = useState(null);
-      const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState([]);
+
 
   useEffect(() => {
     fetchHandler();
