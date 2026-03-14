@@ -37,7 +37,7 @@ export default function Home(){
                     <br />
                     <input type="password" name="email" id="" className="bg-purple-200 p-1 w-80" />
                     </label>
-                    <DefaultButton extraStyle={''} text="Cadastrar" actionHandler={()=>{}} />
+                    <DefaultButton extraStyle={''} isAdded={null} text="Cadastrar" actionHandler={()=>{}} />
                     <p onClick={()=>{redirect("login")}} className="cursor-pointer font-light text-purple-600">Ja tenho uma conta</p>
                 </form>
             </div>

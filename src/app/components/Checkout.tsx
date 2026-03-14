@@ -2,13 +2,13 @@
 import Modal from "./Modal"
 import React, { useContext, useEffect, useState } from "react"
 import { IP } from "@/lib/ip";
-import { Product } from "@/types/product";
 import Money from "./Money";
 import { ShopContext } from "../hooks/ShopContext";
 import { ProductShoppingCartItem } from "@/types/shopping";
 import { ShoppingBagIcon, ShoppingCartIcon } from "@heroicons/react/16/solid";
 import DefaultButton from "./DefaultButton";
 import { TrashIcon } from "@heroicons/react/24/outline";
+import { uniqueId } from "@/types/unique";
 
 export default function Checkout() {
   const [checkoutVisibility, setCheckoutVisibility] = useState(false);
@@ -58,8 +58,8 @@ export default function Checkout() {
 
                 <div className="h-[350px] mt-10 overflow-y-scroll">
                   {cart.items.map((product: ProductShoppingCartItem) =>
-                    <div className="grid grid-cols-1 md:grid-cols-6 gap-4 shadow p-2 items-center">
-                      <div className=""><img className="h-[100%]" src={product.item.image ? product.item.image : ""} /> </div>
+                    <div key={product.subTotal + uniqueId()} className="grid grid-cols-1 md:grid-cols-6 gap-4 shadow p-2 items-center">
+                      <div className="h-40 md:h-[100px] md:w-[150px]"><img className="h-[100%] w-[100%] object-fill" src={product.item.image ? product.item.image : ""}/></div>
                       <p><span className="md:hidden text-md font-semibold">Nome: </span>{product.item.name}</p>
                       <p><span className="md:hidden text-md font-semibold"> Preco: </span> <span className="text-md font-semibold text-green-600"><Money amount={product.item.price} /></span></p>
                       <div className="flex gap-2">
@@ -67,6 +67,10 @@ export default function Checkout() {
                         <input className="w-20" type="number"
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                             const value = parseInt(e.target.value, 10);
+                            if (value == 0) {
+                              product.item.isAddedHandler();
+                            }
+
                             if (!isNaN(value)) {
                               updateItem(product.item, value);
                             }
@@ -76,7 +80,7 @@ export default function Checkout() {
                       </div>
                       <p><span className="md:hidden text-md font-semibold">Total: </span> <Money amount={product.subTotal} /></p>
                       <button
-                        onClick={() =>{product.item.isAddedHandler(); removeItem(product.item);}}
+                        onClick={() => { product.item.isAddedHandler(); removeItem(product.item); }}
                         className="bg-red-600 text-white p-2 text-sm hover:bg-red-700 focus:bg-red-700 transition-colors duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 cursor-pointer"
                       >
                         <span className="flex items-center justify-center gap-4 ">
@@ -99,14 +103,12 @@ export default function Checkout() {
                   Carrinho vazio — vamos começar suas compras?
                 </p>
                 <ShoppingBagIcon className="w-15 h-15 text-black-200 mt-2" />
-                <DefaultButton isAdded={false} text="Continuar comprando" extraStyle={'p-5'} actionHandler={() =>{ setCheckoutVisibility(false); clean(); }} />
+                <DefaultButton isAdded={false} text="Continuar comprando" extraStyle={'p-5'} actionHandler={() => { setCheckoutVisibility(false); clean(); }} />
               </div>
             }
           </>
         </Modal>
-
       }
-
     </>
   )
 }

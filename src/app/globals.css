@@ -24,3 +24,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.purple-glow{ box-shadow: 0 0 30px #8a5cf662;}
+
+.menta-glow{  box-shadow: 0 0 20px #aaf0d059;  }

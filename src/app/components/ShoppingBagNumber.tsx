@@ -7,8 +7,8 @@ export default function ShoppingBagIconNumber(){
     const {cart}=useContext(ShopContext);
     return(
         <div>
-            <p className="absolute top-0 right-17 font-bold text-purple-900">{cart.qty}</p>
-            <ShoppingBagIcon className="w-10- h-8 text-purple-900 cursor-pointer"/>
+            {cart.qty>0 && <p className="absolute top-0 right-17 font-bold text-purple-900">{cart.qty}</p>}
+            <ShoppingBagIcon className="w-6 h-6 hover:text-purple-600 transition cursor-pointer"/>
         </div>
     )
 }

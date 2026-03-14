@@ -1,0 +1,1 @@
+export const uniqueId  =()=>Math.random()*Math.sin(Math.random());

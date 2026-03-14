@@ -1,8 +1,7 @@
 "use client"
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { createContext } from "react";
-import ShopProvider, { ShopContext } from "./hooks/ShopContext";
+import AppProvider, { AppContext } from "./hooks/AppContext";
 
 
 const geistSans = Geist({
@@ -24,11 +23,10 @@ export default function RootLayout({ children,}: Readonly<{ children: React.Reac
 
   return (
     <html lang="en">
-      <title>HosannaShop</title>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ShopProvider>
+        <AppProvider>
         {children}
-        </ShopProvider>        
+        </AppProvider>
       </body>
     </html>
   );

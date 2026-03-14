@@ -2,10 +2,11 @@ import { useState } from "react";
 
 type SearchProps = {
     placeHolder: string,
-    searchHandler: (query: string | null, defaultCollection: Array<any>, category: number | null) => void,
+    searchHandler: (query: string, defaultCollection: Array<any>, category: number) => void,
     defaultCollection: Array<any>,
     categories: Array<any>
 }
+
 export default function Search({ categories, searchHandler, placeHolder, defaultCollection }: SearchProps) {
     const[category,setCategory]= useState(0);
     const[query,setQuery]=useState('');
@@ -22,7 +23,7 @@ export default function Search({ categories, searchHandler, placeHolder, default
                         searchHandler(query, defaultCollection,el.target.value);
                         setCategory(el.target.value);
                         }} className="cursor-pointer shadow p-2">
-                        <option className="bg-red-200" disabled>Categorias</option>
+                        <option className="bg-red-200" disabled >Categorias</option>
                         <option value={0}>Diversos</option>
                         {
                             categories.map((category: any) =>
