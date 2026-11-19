@@ -1,7 +1,7 @@
 export type Product = {
 id: number,
 name:string,
-image:string | null,
+image_url:string | null,
 code:string,
 qty:number,
 in_stock:number,

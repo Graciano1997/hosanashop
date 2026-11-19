@@ -1,7 +1,5 @@
 "use client"
-
 import { ReactElement, ReactNode, useState } from "react"
-
 
 export default function(){
     const [form,setForm]=useState({});
@@ -15,8 +13,8 @@ export default function(){
 
     const formSubmitionHandler =  async(el:any)=>{
         el.preventDefault();
-        
-        const result = await fetch("http://localhost:3000/api/stores/",{
+        // http://localhost:3000/api/companies/1/
+        const result = await fetch("http://localhost:3000/api/companies/",{
             headers:{"Content-Type":"application/json"},
             method:"POST",
             body:JSON.stringify(form)

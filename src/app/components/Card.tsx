@@ -23,10 +23,18 @@ export default function ProductCard({ product, extraStyle }: ProductCardProps) {
   return (
     <>
       <div className={`bg-white/50  shadow hover:shadow-lg transition overflow-hidden p-4 ${extraStyle}`}>
-        <div className="aspect-[16/9] w-full ">
+        {/* <div className="aspect-[16/9] w-full ">
           <img
             className="w-full h-full object-fill"
-            src={product.image ?? ""}
+            src={product.image_url ?? ""}
+          />
+        </div> */}
+
+        <div className="aspect-[16/9] w-full overflow-hidden rounded-lg">
+          <img
+            className="w-full h-full object-contain"
+            src={product.image_url?? ""}
+            alt={product.name}
           />
         </div>
 
@@ -44,27 +52,35 @@ export default function ProductCard({ product, extraStyle }: ProductCardProps) {
       {visible &&
         <div className="absolute">
           <Modal closeHandler={() => { setVisible(false) }}>
-            <div className="h-full md:flex md:justify-center">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 p-6 shadow-md self-center overflow-y-scroll">
+            <div className="md:flex md:justify-center " style={{zIndex:3000}}>
+              <div className="grid grid-cols-1 md:grid-cols-[3fr_7fr] gap-10 p-6  place-items-center">
                 {/* Image */}
-                <div className="">
-                  {product.image ? (
-                    <img
-                      className="h-full w-full object-contain dark:invert"
-                      src={product.image}
-                      alt={product.name}
-                    />
-                  ) : (
-                    <Image
-                      className="dark:invert"
-                      src="/next.svg"
-                      alt="Next.js logo"
-                      width={180}
-                      height={38}
-                      priority
-                    />
-                  )}
-                </div>
+                <div className="
+                relative
+                w-100
+                aspect-[4/3]
+                flex items-center justify-center
+                overflow-hidden
+                rounded-xl
+                
+              ">
+                {product.image_url ? (
+                  <img
+                    className="h-full w-full object-contain"
+                    src={product.image_url}
+                    alt={product.name}
+                  />
+                ) : (
+                  <Image
+                    className="object-contain dark:invert"
+                    src="/next.svg"
+                    alt="Next.js logo"
+                    width={180}
+                    height={38}
+                    priority
+                  />
+                )}
+              </div>
 
                 {/* Details */}
                 <div className="flex flex-col gap-4">
@@ -72,7 +88,7 @@ export default function ProductCard({ product, extraStyle }: ProductCardProps) {
                   <p className="text-2xl text-green-600 font-semibold">
                     <Money amount={product.price} />
                   </p>
-                  <p><span className="font-semibold">Acerca:</span> {product.observation}</p>
+                  <p><span className="font-semibold">Acerca:</span> {product.description}</p>
                   <p><span className="font-semibold">Categoria:</span> {product.category}</p>
                   <p><span className="font-semibold">Em stock:</span> {product.in_stock}</p>
                   <p><span className="font-semibold">Marca:</span> {product.brand}</p>
